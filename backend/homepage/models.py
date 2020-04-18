@@ -4,6 +4,7 @@ from django.db import models
 class Songs(models.Model):
     name = models.CharField(max_length = 50)
     dor = models.DateField()
+    genre = models.CharField(max_length = 20, default = "-")
     number_of_votes = models.IntegerField(default = 0)
     average_rating = models.FloatField(default = 0.0)
 

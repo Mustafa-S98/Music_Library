@@ -64,6 +64,11 @@ const so_columns = [
     key: 'dor',
   },
   {
+    title: 'Genre',
+    dataIndex: 'genre',
+    key: 'genre',
+  },
+  {
     title: 'Average Rating',
     dataIndex: 'average_rating',
     key: 'average_rating',

@@ -4,7 +4,7 @@ from homepage.models import Artist, Songs
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Songs
-        fields = ('id', 'name', 'dor', 'average_rating')
+        fields = ('id', 'name', 'dor', 'genre', 'average_rating')
 
 class ArtistSerializer(serializers.ModelSerializer):
     songs = SongSerializer(read_only=True, many=True)

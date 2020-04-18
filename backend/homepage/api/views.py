@@ -37,7 +37,7 @@ class SimpleView(APIView):
 
 class Song_addView(APIView): 
    def post(self, request):
-       s = Songs(name=request.data['name'], dor= request.data['dor'][:10], number_of_votes= 0, average_rating= request.data['rating'])
+       s = Songs(name=request.data['name'], dor= request.data['dor'][:10], genre= request.data['genre'], number_of_votes= 0, average_rating= request.data['rating'])
        s.save()
        ar = Artist.objects.get(name = request.data['ar_name'])
        ar.songs.add(s)

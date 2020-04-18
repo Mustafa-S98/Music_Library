@@ -1,4 +1,4 @@
-import { Form, DatePicker, Input, Button, Rate } from 'antd';
+import { Form, DatePicker, Input, Button, Rate, Select } from 'antd';
 import React from 'react';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ const layout = {
       span: 16,
     },
   };
-  const tailLayout = {
+const tailLayout = {
     wrapperCol: {
       offset: 8,
       span: 16,
@@ -38,13 +38,7 @@ class SongFormComponent extends React.Component{
       this.setState({[e.target.name]: e.target.value})
     }
     
-    handleDateChange = value => {
-      if (value && value.isValid()) {
-        this.setState({
-          dob: value,
-        });
-      }
-    }
+
   
 
     send(){
@@ -93,6 +87,25 @@ class SongFormComponent extends React.Component{
                         },
                       ]}
                     ><Input name="ar_name" onInput={e => this.inputHandle(e)} />
+                    </Form.Item>
+
+                    <Form.Item
+                      label="Genre"
+                      rules={[
+                        {required: true,
+                        message: 'Please select a genre',}
+                      ]}
+                    >
+                        <Select
+                          placeholder="Select a genre"
+                          onChange={ (val) => this.setState({ genre : val }) }
+                        >
+                          <Select.Option value="romantic">Romantic</Select.Option>
+                          <Select.Option value="sad">Sad</Select.Option>
+                          <Select.Option value="inspirational">Inspirational</Select.Option>
+                          <Select.Option value="nationalism">Nationalism</Select.Option>
+                          <Select.Option value="calm">Calm</Select.Option>
+                        </Select>
                     </Form.Item>
       
                     <Form.Item name="rating" label="Rating">
