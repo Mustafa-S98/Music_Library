@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 import { Descriptions } from 'antd';
+import UserProfile from './UserSession';
 
 class SongDetail extends React.Component{
 
@@ -17,8 +18,8 @@ class SongDetail extends React.Component{
         this.setState({
           song : res.data
         });
-        console.log(this.state.song)
       })
+      UserProfile.set_search(songID);
   }
 
   render(){

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Tag, Rate } from 'antd';
 import Song from '../components/Song';
+import UserProfile from './UserSession';
 
 
 const ar_columns = [
@@ -39,7 +40,7 @@ const ar_columns = [
       title: 'Rating',
       dataIndex: 'rating',
       key: 'rating',
-      render: (val) => <Rate allowHalf defaultValue={val.average_rating} disabled />,
+      render: (text, val) => <Rate allowHalf defaultValue={val.rating} disabled />,
     },
   ];
 
@@ -77,16 +78,18 @@ const so_columns = [
     title: 'Rating',
     dataIndex: ['id', 'average_rating'],
     key: 'rating',
-  render: (text, val) => <Rate allowHalf defaultValue={val.average_rating} onClick={console.log(val.id, text)} />,
+  render: (text, val) => <Rate allowHalf defaultValue={val.average_rating} />,
   },
 ];
+
+var sign;
   
 
 class Homepage extends React.Component{
 
   state = {
     artists : [],
-    songs: []
+    songs: [],
   }
 
   componentDidMount(){
@@ -103,13 +106,18 @@ class Homepage extends React.Component{
           songs : resp.data
         });
       })
-  }
+
+    if(UserProfile.getId() != ""){
+      sign = <span><h1><p>Suggested songs</p></h1></span>
+    }
+}
 
 
   render(){
     return(
       <div>
-        <span><h1><p>Top 10 Artists</p></h1></span>
+        {sign}
+         <span><h1><p>Top 10 Artists</p></h1></span>
         <Artist col={ar_columns} data={this.state.artists} />
         <br />
         <br />

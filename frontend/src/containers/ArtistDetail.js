@@ -14,6 +14,7 @@ class ArtistDetail extends React.Component{
   componentDidMount(){
       const artistID = this.props.match.params.artistID;
       var art_song = [];
+      axios.get(`http://127.0.0.1:8000/api/plot/${artistID}`)
     axios.get(`http://127.0.0.1:8000/api/artist/${artistID}`)
       .then(res => {
         this.setState({
@@ -35,8 +36,9 @@ class ArtistDetail extends React.Component{
           <Descriptions title="Artist Info">
             <Descriptions.Item label="Name" className="App-label">{this.state.artist.name}</Descriptions.Item>
     <Descriptions.Item label="Date Of Birth" className="App-label">{this.state.artist.dob}</Descriptions.Item>
-    <Descriptions.Item label="Songs" className="App-label">{this.state.song}</Descriptions.Item>
     <Descriptions.Item label="Rating" className="App-label">{this.state.artist.rating}</Descriptions.Item>
+    <Descriptions.Item label="Songs" className="App-label">{this.state.song}</Descriptions.Item>
+    <img src={process.env.PUBLIC_URL + '/logo.png'} alt="plot" />
           </Descriptions>
     )
   }
