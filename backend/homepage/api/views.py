@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 
-from homepage.models import Artist, Songs
-from .serializers import ArtistSerializer, SongSerializer
+from homepage.models import Artist, Songs, Users
+from .serializers import ArtistSerializer, SongSerializer, UsersSerializer
 
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
@@ -11,6 +11,9 @@ class ArtistView(ListAPIView):
     queryset = Artist.objects.all()[:10]
     serializer_class = ArtistSerializer
 
+class UserView(ListAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
 
 class ArtistDetailView(RetrieveAPIView):
     queryset = Artist.objects.all()
@@ -27,6 +30,36 @@ class SongDetailView(RetrieveAPIView):
 
 
 from rest_framework.views import APIView
+
+class UpdateGenre(APIView):
+
+    def post(self, request):
+        data = request.data['data']
+        data = data.split('%')
+        u = Users.objects.get(name = data[0])
+        searches = [int(i) for i in data[1].split(',')]
+
+        genres = []
+        for i in searches:
+            tmp = Songs.objects.get(id = i)
+            genres.append(tmp.genre)
+        print(genres)
+
+        genre = dict()
+        for i in genres:
+            if i in genre.keys():
+                genre[i] = genre[i] + 1
+            else:
+                genre[i] = 1
+        print(genre)
+        val = max(genre.values())
+        for key, value in genre.items():
+            if val == value:
+                u.genre = key
+                u.save()
+                break
+
+        return Response("200")
 
 class Plot(APIView):
 

@@ -1,21 +1,25 @@
 import React from 'react';
 import { Layout, Menu, Button } from 'antd';
-import axios from 'axios';
 
 const { Content, Footer, Sider } = Layout;
 
 import UserProfile from './UserSession';
+import axios from 'axios';
 
 function handleClick(){
     var id = window.prompt("ID");
     UserProfile.setId(id);
-    axios.get('http://localhost:3000/');
+    window.location.reload(false);
 }
 
 function logout(){
+    var search = UserProfile.get_search();
+    var name = UserProfile.getId();
+    var data = name + "%" + search;
+    axios.post('http://127.0.0.1:8000/api/update_genre', { data });
     localStorage.setItem('id','');
-    console.log(UserProfile.get_search());
     localStorage.setItem('search','');
+    window.location.reload(false);
 }
 
 const CustomLayout = (props) => {
@@ -31,11 +35,12 @@ const CustomLayout = (props) => {
         >
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-            <br />
+            <Menu.Item key="login">
             <Button onClick={handleClick}>Login</Button>
-            <br />
+            </Menu.Item>
+            <Menu.Item key="logout">
             <Button onClick={logout}>Log Out</Button>
-            <br />
+            </Menu.Item>
             <Menu.Item key="home">
             <span className="nav-text"><a href="http://localhost:3000/">Home</a></span>
             </Menu.Item>

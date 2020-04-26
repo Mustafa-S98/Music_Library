@@ -28,7 +28,7 @@ const ar_columns = [
           {tags.map(tag => {
             let color = tag.length > 5 ? 'geekblue' : 'green';
             return (
-              <Tag color={color} key={tag}>
+              <Tag color={color} key={tag.id}>
                 {tag.name}
               </Tag>
             );
@@ -44,13 +44,9 @@ const ar_columns = [
     },
   ];
 
-function send(val){
-  axios({
-    method: 'post',
-    url: 'http://127.0.0.1:8000/api/update_rating/',
-    data: val
-  }).then(console.log(val));
-};
+// function send(val){
+//   axios.post('http://127.0.0.1:8000/api/update_rating/', {val});
+// };
 
 const so_columns = [
   {
@@ -90,6 +86,7 @@ class Homepage extends React.Component{
   state = {
     artists : [],
     songs: [],
+    genre: ''
   }
 
   componentDidMount(){
@@ -106,18 +103,34 @@ class Homepage extends React.Component{
           songs : resp.data
         });
       })
-
+    
+    var arr = "";
     if(UserProfile.getId() != ""){
-      sign = <span><h1><p>Suggested songs</p></h1></span>
+      axios.get('http://127.0.0.1:8000/api/users')
+      .then(res => {
+        res.data.map( (val) => {
+          if(val.name == UserProfile.getId()){
+            this.setState({
+              genre : val.genre
+            });
+          }
+        })
+        console.log(this.state.genre);
+      }).then(() => {
+        this.state.songs.map( (val) => {
+          if(this.state.genre == val.genre){ arr = arr + val.name + " , "; }
+        });
+        console.log(arr)
+      }).then(() => {sign = <span><h1><p>Your preference of songs : { arr }</p></h1></span>});
     }
-}
+  }
 
 
   render(){
     return(
       <div>
         {sign}
-         <span><h1><p>Top 10 Artists</p></h1></span>
+        <span><h1><p>Top 10 Artists</p></h1></span>
         <Artist col={ar_columns} data={this.state.artists} />
         <br />
         <br />
