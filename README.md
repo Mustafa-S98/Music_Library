@@ -84,7 +84,7 @@ Data science
 
 Graphical represenation of number of hits and flops for each artist.
 
-Consitional rendering of components
+Conditional rendering of components
 
 
 ## Database Models :
