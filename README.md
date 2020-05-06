@@ -50,6 +50,10 @@ Also there is a feature of assigning rating of a song, from homepage.
 
 The rating of artist is average of the ratings over his / her songs, it is read only (as it is based on the ratings on his / her songs) and is displayed besides their name on homepage.
 
+There is also session recording working in background using which there is an implementation of suggested songs as per the user's previous session searches.
+
+Also there is data science module which is plotting graphs for each artist based on number of hits and flops.
+
 
 
 ## Features :
@@ -71,6 +75,10 @@ Song and artist adding functionality
 Rating functionality
 
 Forms with validations
+
+Suggested songs implementation as per user
+
+Data science and graphs to show number of hits and flops per artist. 
 
 
 
