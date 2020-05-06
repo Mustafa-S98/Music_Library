@@ -50,10 +50,6 @@ Also there is a feature of assigning rating of a song, from homepage.
 
 The rating of artist is average of the ratings over his / her songs, it is read only (as it is based on the ratings on his / her songs) and is displayed besides their name on homepage.
 
-There is also session management and session recording features.
-
-Also there is functionality of data science and data visualisation.
-
 
 
 ## Features :
@@ -76,15 +72,6 @@ Rating functionality
 
 Forms with validations
 
-Session management
-
-Session recording
-
-Data science
-
-Graphical represenation of number of hits and flops for each artist.
-
-Conditional rendering of components
 
 
 ## Database Models :
