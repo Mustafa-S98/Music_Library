@@ -106,14 +106,11 @@ Data science and graphs to show number of hits and flops per artist.
 
 ## Updations possible :
 
-Add graphs or similar visuals for better and attractive statistics of artists.
-
-Add a Machine learning model which can filter provide user preferenced searching of songs, as per his / her previous search history
-
 Add a chatbot to give better UI experience to users.
 
-Add data science module to derive important inferences like number of hits corresponding to an artist, rating analysis corresponding to songs, and similar tasks which need data insights.
+Provide an interface via which songs can be streamed as well.
 
+Can provide lyrics of songs as well using the APIs providing this functionality. (Is not implemented at the moment, as most of those APIs are paid.)
 
 
 
@@ -128,3 +125,7 @@ Geeksforgeeks
 ant-d docs
 
 react docs
+
+
+
+  > Snippets of program run are present in folder named **" Snippets "** folder present at root directory.
