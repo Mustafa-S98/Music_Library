@@ -1,6 +1,5 @@
 ## Project : Music Webapp
 
-## Developed By : Mustafa Sadriwala
 
 
 
@@ -98,6 +97,12 @@ Data science and graphs to show number of hits and flops per artist.
         dor (date),
         number_of_votes (integer),                  (Its significance is in calculating average rating in case user updates existing rating)
         average_rating (float)
+      )
+
+      Users(
+        id (primary key, integer),
+        name (char, max-length = 40)
+        genre (char, max-length = 20)
       )
 
 **[ Songs and Artist have many to many relationship between Artist and Songs ]**
