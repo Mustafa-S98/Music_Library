@@ -5,15 +5,17 @@
 
 ## Table of contents :
 
-### [ Technology stack ](#technologies-used)
+### [ Technology stack ](#Technologies-Used)
 
-### [ Project Description ](#project-description)
+### [ Project Description ](#Project-Description)
 
-### [ Features ](#features)
+### [ Features ](#Features)
 
-### [ Database Models ](#database-models)
+### [ Database Models ](#Database-Models)
 
-### [ URLs ](#urls)
+### [ Updations possible ](#Updations-possible)
+
+### [ References ](#References)
 
 ### Technologies Used :
 
