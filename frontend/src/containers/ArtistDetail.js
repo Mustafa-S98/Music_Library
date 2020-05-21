@@ -2,13 +2,24 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 
+import plot from './plot.png';
+import stats from './stats.png';
+
 import { Descriptions } from 'antd';
+
+function get_plots(){
+  import plot from "./plot.png";
+  import stats from "./stats.png";
+
+  return {plot: plot, stats: stats};
+}
 
 class ArtistDetail extends React.Component{
 
   state = {
     artist : {},
     song : [],
+    plot, stats
   }
 
   componentDidMount(){
@@ -28,17 +39,18 @@ class ArtistDetail extends React.Component{
     this.setState({
         song: art_song
     });
+    console.log(this.state.song)
   }
 
   render(){
-    return(
-            
-          <Descriptions title="Artist Info">
+    return(         
+          <Descriptions title="Artist Info" column={2}>
             <Descriptions.Item label="Name" className="App-label">{this.state.artist.name}</Descriptions.Item>
-    <Descriptions.Item label="Date Of Birth" className="App-label">{this.state.artist.dob}</Descriptions.Item>
-    <Descriptions.Item label="Rating" className="App-label">{this.state.artist.rating}</Descriptions.Item>
-    <Descriptions.Item label="Songs" className="App-label">{this.state.song}</Descriptions.Item>
-    <img src={process.env.PUBLIC_URL + '/logo.png'} alt="plot" />
+            <Descriptions.Item label="Date Of Birth" className="App-label">{this.state.artist.dob}</Descriptions.Item>
+            <Descriptions.Item label="Rating" className="App-label">{this.state.artist.rating}</Descriptions.Item>
+            <Descriptions.Item label="Songs" className="App-label">{this.state.song}</Descriptions.Item>
+            <Descriptions.Item label="Plot" className="App-label"><img src={ plot } alt="plot" /></Descriptions.Item>
+            <Descriptions.Item label="Stats" className="App-label"><img src={ stats } alt="stats" /></Descriptions.Item>
           </Descriptions>
     )
   }

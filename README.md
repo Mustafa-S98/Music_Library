@@ -1,8 +1,6 @@
 ## Project : Music Webapp
 
 
-
-
 ## Table of contents :
 
 ### [ Technology stack ](#Technologies-Used)

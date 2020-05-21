@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,6 +121,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+REFERRER_POLICY = 'no-referrer'
 
 CORS_ORIGIN_ALLOW_ALL = True
 

@@ -86,10 +86,19 @@ class Homepage extends React.Component{
   state = {
     artists : [],
     songs: [],
-    genre: ''
+    genre: '',
+    top_artist: '',
+    max_voted_song: '',
   }
 
   componentDidMount(){
+    axios.get('http://127.0.0.1:8000/api/stats/').then(res => {
+      this.setState({
+        top_artist : res.data.most_rated_artist,
+        max_voted_song : res.data.most_voted_song
+      });
+    })
+
     axios.get('http://127.0.0.1:8000/api/artist/')
       .then(res => {
         this.setState({
@@ -105,11 +114,11 @@ class Homepage extends React.Component{
       })
     
     var arr = "";
-    if(UserProfile.getId() != ""){
+    if(UserProfile.getId() !== ""){
       axios.get('http://127.0.0.1:8000/api/users')
       .then(res => {
         res.data.map( (val) => {
-          if(val.name == UserProfile.getId()){
+          if(val.name === UserProfile.getId()){
             this.setState({
               genre : val.genre
             });
@@ -118,7 +127,7 @@ class Homepage extends React.Component{
         console.log(this.state.genre);
       }).then(() => {
         this.state.songs.map( (val) => {
-          if(this.state.genre == val.genre){ arr = arr + val.name + " , "; }
+          if(this.state.genre === val.genre){ arr = arr + val.name + " , "; }
         });
         console.log(arr)
       }).then(() => {sign = <span><h1><p>Your preference of songs : { arr }</p></h1></span>});
@@ -129,7 +138,11 @@ class Homepage extends React.Component{
   render(){
     return(
       <div>
-        {sign}
+        <span> <h1> Top rated artist : </h1> {this.state.top_artist} </span>
+        <span> <h1> Maximum voted song : </h1> {this.state.max_voted_song} </span>
+        <hr></hr>
+        <span> {sign} </span>
+        <hr></hr>
         <span><h1><p>Top 10 Artists</p></h1></span>
         <Artist col={ar_columns} data={this.state.artists} />
         <br />

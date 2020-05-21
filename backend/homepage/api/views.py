@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from django.db.models import Max
 
 from homepage.models import Artist, Songs, Users
 from .serializers import ArtistSerializer, SongSerializer, UsersSerializer
@@ -66,10 +68,14 @@ class Plot(APIView):
     def get(self, request, id):
 
         import matplotlib.pyplot as plt
+        import seaborn as sns
+
+        sns.set()
 
         hits = 0
         flops = 0
         song_lst = Songs.objects.all().filter(artists = id)
+        
         for i in song_lst:
             if i.average_rating > 2.5:
                 hits += 1
@@ -85,13 +91,34 @@ class Plot(APIView):
         fig.gca().add_artist(centre_circle)
         plt.axis('equal')
         plt.savefig('../frontend/src/containers/plot.png')
+        
+        plt.close()
+        
+        song_lst = Songs.objects.all().filter(artists = id).order_by('dor')
+        x_val = []
+        y_val = []
+
+        for i in song_lst:
+            x_val.append(i.name)
+            y_val.append(i.average_rating)
+        
+        plt.plot(x_val, y_val, 'g-')
+        plt.xlabel('Songs')
+        plt.ylabel('Rating')
+        plt.savefig('../frontend/src/containers/stats.png')
+
+        plt.close()
+
         return Response("200")
 
 class SimpleView(APIView): 
    def post(self, request):
-       ar = Artist(name=request.data['name'], dob= request.data['dob'][:10], rating= 0.0)
-       ar.save()
-       return Response("Simple")
+       try:
+           ar = Artist(name=request.data['name'], dob= request.data['dob'][:10], rating= 0.0)
+           ar.save()
+           return HttpResponseRedirect("http://localhost:3000")
+       except:
+            return Response("Validation of data failed")
 
 
 class Song_addView(APIView): 
@@ -111,4 +138,21 @@ class Song_addView(APIView):
        ar.rating = count / num
        ar.save()
 
-       return Response("Simple")
+       return HttpResponseRedirect("http://localhost:3000")
+
+
+class StatsView(APIView):
+    def get(self, request):
+        import json
+
+        data = dict()
+
+        max_rated = Artist.objects.all().aggregate(Max('rating'))
+        ar = Artist.objects.all().filter(rating = max_rated['rating__max'])
+        data['most_rated_artist'] = ar[0].name
+
+        song = Songs.objects.all().aggregate(Max('average_rating'))
+        s = Songs.objects.all().filter(average_rating = song['average_rating__max'])
+        data['most_voted_song'] = s[0].name
+
+        return Response(data)
