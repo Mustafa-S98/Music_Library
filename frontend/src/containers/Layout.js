@@ -59,7 +59,7 @@ const CustomLayout = (props) => {
                 {props.children}
             </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Developed by : Mustafa Sadriwala</Footer>
+        // <Footer style={{ textAlign: 'center' }}>Developed by : Mustafa Sadriwala</Footer>
         </Layout>
     </Layout>
     );

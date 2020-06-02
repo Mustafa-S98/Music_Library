@@ -7,12 +7,6 @@ import stats from './stats.png';
 
 import { Descriptions } from 'antd';
 
-function get_plots(){
-  import plot from "./plot.png";
-  import stats from "./stats.png";
-
-  return {plot: plot, stats: stats};
-}
 
 class ArtistDetail extends React.Component{
 
