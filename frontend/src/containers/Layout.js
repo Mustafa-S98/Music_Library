@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Menu, Button } from 'antd';
 
 const { Content, Footer, Sider } = Layout;
+import { CopyrightCircleTwoTone } from '@ant-design/icons';
 
 import UserProfile from './UserSession';
 import axios from 'axios';
@@ -59,7 +60,12 @@ const CustomLayout = (props) => {
                 {props.children}
             </div>
         </Content>
-        // <Footer style={{ textAlign: 'center' }}>Developed by : Mustafa Sadriwala</Footer>
+        
+      <Footer style={{ textAlign: 'center' }}> 
+      		<CopyrightCircleTwoTone /> 
+      		Developed By : Mustafa Sadriwala
+      </Footer>
+        
         </Layout>
     </Layout>
     );
